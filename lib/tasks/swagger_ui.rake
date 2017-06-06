@@ -1,5 +1,6 @@
 require 'git'
 
+# TODO: update task to work with new swagger-ui
 namespace :swagger_ui do
   namespace :dist do
     desc 'Update Swagger-UI from wordnik/swagger-ui.'
