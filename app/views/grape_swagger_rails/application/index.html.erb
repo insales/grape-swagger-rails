@@ -1,8 +1,9 @@
 <!-- HTML for static distribution bundle build -->
 <!DOCTYPE html>
-<html lang="en" data-swagger-options="<%= GrapeSwaggerRails.options.marshal_dump.to_json %>">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="swagger-options" id="swagger-options" content="<%= GrapeSwaggerRails.options.marshal_dump.to_json %>">
   <title><%= GrapeSwaggerRails.options.app_name || 'Swagger UI' %></title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
   <%= stylesheet_link_tag 'grape_swagger_rails/application.css' %>
@@ -68,9 +69,11 @@
 <%= javascript_include_tag 'grape_swagger_rails/application.js' %>
 <script>
 window.onload = function() {
+  var options = JSON.parse(document.head.querySelector('[name=swagger-options]').content);
+
   // Build a system
   const ui = SwaggerUIBundle({
-    url: "http://petstore.swagger.io/v2/swagger.json",
+    url: options.app_url + options.url,
     dom_id: '#swagger-ui',
     presets: [
       SwaggerUIBundle.presets.apis,
